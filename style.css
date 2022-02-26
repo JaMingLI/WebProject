@@ -1,0 +1,377 @@
+/* 基本設定開始 */
+@import url(https://fonts.googleapis.com/earlyaccess/notosanstc.css);
+:root{
+    --navBackground:#ffffff;
+    --navTextColor: #89391a;
+    --navhoverColor: #99cc7f;
+    --titleColor: #89391a;
+    --backgroundColor:#e0c4a0;
+    --opacityFontColor: rgba(30,30,30,0.5);
+    --mainBorder: 1.5px solid var(--opacityFontColor);
+}
+* ,body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family:"Noto Sans TC", 微軟正黑體, sans-serif;
+    text-decoration: none;
+    list-style: none;     
+}
+a {
+    text-decoration: none;
+}
+h1, h2, h3, h4, p, ul li{
+    font-family:"Noto Sans TC", 微軟正黑體, sans-serif;
+    font-weight: bold;
+}
+.about div, .news div, .product div, .menu div{
+    position: relative;
+}
+.section:nth-child(odd) {
+    background-color: #e0c4a0;    
+}
+/* 基本設定結束 */
+/* 浮水印背景開始 */
+.back{
+    position:fixed;  /*切換成fixed 再把z index調整在最底部*/
+    z-index: -1;
+    width: 100%;  
+    height: 100%;
+    background: url(https://www.shop1688.com.tw/aom20210226060/img/bg.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment:fixed;
+}
+.backstart{           
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(251, 246, 234, 0.841);
+}
+/* 浮水印背景結束 */
+/* 導覽列開始 */
+.header-self{    
+    position: fixed;    /*讓導覽列固定*/
+    z-index: 99;
+    background-color: var(--navBackground);  
+    height: auto;       
+    width: 100%;        
+    box-shadow: 0 0 1em gray;
+    display: flex;      /*flex 設定  裡面有兩個block   分別 blockimg 、 menuList*/
+    align-items: center;
+    justify-content: space-between;
+    padding-right: 15px;
+    padding-left: 15px;    
+}
+.menuList-self{    
+    display: block;          
+}
+.menuList-self ul{
+    display: flex;       /*flex 設定  裡面有7個 li */
+    flex-direction: row;          
+    justify-content: flex-end;   
+    margin-bottom: 0; 
+    padding-left: 0;  
+}
+.menuList-self li{       
+    font-weight: bold;
+    font-size: 1.2rem;   
+    margin-left: 2rem;     /*讓 li 變寬  享用 gap 但忘記了*/  
+}
+.menuList-self a{
+    color: var(--navTextColor);    
+}
+.menuList-self a:hover{    
+    color: var(--navhoverColor);  
+    transition: all 0.5s ease-in-out;  /* 字樣 變色動畫*/
+}
+.S-img-self{
+    display: none;             /* 畫面小於1200px 時 最左邊的圖案*/
+    top: 30px;
+    position: relative;     
+    margin-left: 1px;  
+}
+.blockimg-self{    
+    display: flex;             /* header 底下的flex 負責控制 畫面小於1200 px */
+    justify-content: space-between;
+    position: relative; 
+    margin-left:1rem;     
+}
+.btn-menu-self{
+    display: none;              /*btn 基礎設定 */
+    position: relative;
+    right: 15px;    
+    z-index: 1;                 /*設定在最上層*/
+    /*按鈕底層設定開始*/
+    user-select: none;     
+    appearance: none;
+    border: none;
+    outline: none;
+    background: none;
+    cursor: pointer;
+    /*設定結束*/
+}
+.btn-menu-self span {
+    display: block;                 /*按鈕型態設定*/
+    width: 43px;
+    height: 5px;
+    margin-bottom: 10px;
+    position: relative;
+    border-radius: 6px;         
+    background-color:#736356 ;
+    transition: all 0.4s ease-in-out;
+}
+/*按鈕動畫設定開始   套用 js 使用*/
+.btn-menu-self.active-self span:nth-child(2){
+    transform: translateX(-10px);
+    opacity: 0;      
+}
+.btn-menu-self.active-self span:nth-child(1){
+    transform: translate(0px ,15px) rotate(45deg);    
+}
+.btn-menu-self.active-self span:nth-child(3){
+    transform: translate(0px ,-15px) rotate(-45deg);    
+}
+/*按鈕動畫設定結束*/
+/* 導覽列結束 */
+
+/*   bootstrap carousel 調整開始  */
+.carousel{
+    top:0px;      
+    position:relative;  
+    padding-top: 70px;
+}
+.carousel-indicators [data-bs-target]{
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+.carousel-control-next:hover, .carousel-control-prev:hover{
+    background: rgba(0, 0, 0, .2);
+}
+/*   bootstrap 調整結束  */
+
+@media screen and (max-width: 1200px){
+    .header-self{ 
+        position: fixed;    /*讓導覽列固定*/
+        z-index: 99; 
+        display: flex;       
+        flex-wrap: wrap;            /*為了把 menulist  給擠下來*/
+        width: 100%;
+        justify-content: space-between;               
+    }
+    .carousel{
+        top:0px;      
+        position:relative;  
+        padding-top: 70px;
+    }
+    .menuList-self, .menuList-self li:nth-child(7){
+        display: none;              /*先要隱藏  為了設計用按鈕打開*/ /*隱藏第7個 li*/
+    }       
+    .menuList-self ul{
+        width: 100% ; 
+        display: flex;
+        flex-direction: column;     
+        align-items: center;                            
+    }
+    .menuList-self li{
+        margin-left: 0;     
+        margin-bottom: 1rem;                
+    }
+    .menuList-self.is-active-self{
+        display:block;              /* 套 js 打開 menulist*/
+        position: relative;
+        width: 100%;
+    }     
+    .btn-menu-self, .S-img-self{       
+        display: block;             
+    }    
+    .blockimg-self{         
+        width: 100% ;                
+    }     
+    .aboutFlex{
+        flex-wrap: wrap;
+    }
+    .contextBox{        
+        flex-direction: column;             
+    }
+}
+/* 導覽列結束 */
+/* section Block背景調整開始*/
+.about, .news, .vedio, .footer, .product, .menu{
+    width: 100%;
+    height: auto;        
+}
+.about, .news, .vedio, .footer{
+    padding: 7% 15vw;    
+}
+.product{
+    padding: 7% 1vw;      
+}
+.menu{
+    padding: 7% 20vw;     
+}
+/* section Block背景調整結束*/
+/* section Title調整開始*/
+.aboutTitle{
+    display: flex;
+    justify-content: center;
+    color: var(--titleColor);
+}
+.newsTitle, .menuTitle, .vedioTitle, .footerTitle{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: row;   
+    padding-bottom: 5%;
+    color: var(--titleColor);
+}
+.productTitle{
+    text-align: center;
+    color: var(--titleColor);
+}
+/* section Title調整結束*/
+/*  about start  */
+.aboutFlex{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: row;    
+}
+.imgblock01, .imgblock02{
+    padding: 3%;
+}
+.imgblock01 > img , .imgblock02 > img{
+    width: 100%;
+    height: auto;
+    box-shadow:  5px 5px 10px rgb(73 73 73 / 80%);
+}
+.aboutStory{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;    
+}
+/*  about end  */
+/*  news start  */
+.newsimg, .newsText{
+    display: flex;
+    justify-content: center;
+    padding-bottom: 1rem;
+}
+.newsimg img{
+    width: 100%;
+    height: auto;
+    max-width: 754px;
+    max-height: 547px;
+    box-shadow:  5px 5px 10px rgb(73 73 73 / 80%);
+    
+}
+/*  news end  */
+/*  product start  */
+.sliderBox{
+    display: flex;
+    justify-content:center; 
+    align-items: center;
+}
+/*  product end  */
+/* menu start*/
+.menuTop{
+    background-color: #89391a;
+    color: #fff;
+    text-align: center;
+    margin-bottom: -8px;
+    padding: 10px;
+    font-weight: 500;
+}
+.menuText{
+    background-color: #fff;
+    display: flex;
+    justify-content: center;  
+    align-items: flex-start; 
+    flex-direction: column;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 15px;
+}
+.menuText ul li{
+    color: rgb(165, 165, 165);
+}
+/* menu end*/
+/* vedio start*/
+.vedioBox{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.vedioBox .Box {
+    display: flex;
+    flex-direction: column;    
+    height: 35vh;  
+    width: 50vh;   
+}
+.vedioBox .Box iframe{    
+    width: 100%;
+    height: 100%;
+}
+.vedioBox .Box p{
+    font-size: 18px;
+    font-weight: bold;    
+    color: black;
+}
+/* vedio end*/
+/*footer start*/
+.contextBox{
+    display: flex;
+    justify-content: center;
+    align-items: center;       
+}
+.map, .map iframe, .footerText{
+    width:100%;    
+}
+.footerText h3 {
+    font-size: 20px;
+    color: #89391a;
+}
+.footerText ul {
+    padding: 0;
+    padding-left: 1rem;
+}
+.footerText ul li{    
+    font-size: 18px;
+    line-height: 30px; 
+    padding-top: 1rem;   
+    border-bottom: var(--mainBorder);
+    text-align: center;
+}
+.version{
+    text-align: center;
+    font-size: 8px;
+    background-color: #996953;   
+    margin-bottom: 0; 
+}
+.icronBOX{    
+    z-index: 99;
+    width: 100%;
+    height: 8%;
+    top: 93vh;
+    padding:10px;
+    background-color: #e0c4a0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.floatNav{
+    position: fixed;
+}
+.fa-solid, .fa-brands{
+    font-size: 35px;    
+}
+.fa-solid:hover, .fa-brands:hover{
+    transform: scale(1.1);
+    transition: 0.2s;
+    cursor: pointer;
+}
+/*footer end*/
